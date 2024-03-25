@@ -102,7 +102,7 @@ class IconTextFieldRow extends StatelessWidget {
                 decoration:  InputDecoration(
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.all(8.0),
-                  hintText: 'Name'
+                  hintText: hint
                 )
               ),
             )
