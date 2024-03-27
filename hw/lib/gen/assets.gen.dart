@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart';
 class Assets {
   Assets._();
 
+  static const AssetGenImage button = AssetGenImage('assets/button.png');
   static const AssetGenImage female = AssetGenImage('assets/female.png');
   static const AssetGenImage git = AssetGenImage('assets/git.png');
   static const AssetGenImage google = AssetGenImage('assets/google.png');
@@ -19,10 +20,11 @@ class Assets {
   static const AssetGenImage key = AssetGenImage('assets/key.png');
   static const AssetGenImage linkedIN = AssetGenImage('assets/linkedIN.png');
   static const AssetGenImage mail = AssetGenImage('assets/mail.png');
+  static const AssetGenImage visible = AssetGenImage('assets/visible.png');
 
   /// List of all assets
   static List<AssetGenImage> get values =>
-      [female, git, google, human, key, linkedIN, mail];
+      [button, female, git, google, human, key, linkedIN, mail, visible];
 }
 
 class AssetGenImage {
