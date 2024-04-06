@@ -20,7 +20,11 @@ class MyHome extends StatelessWidget {
       );
 }
 class _HomeContent extends StatelessWidget {
-  const _HomeContent({super.key});
+   _HomeContent({super.key});
+
+  String currName = '';
+  String currEmail = '';
+  String currPassword = '';
 
   @override
   Widget build(BuildContext context) =>
@@ -94,22 +98,77 @@ class _HomeContent extends StatelessWidget {
                     Text('or', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),),
                     SizedBox(height: 20),
 
-                    IconTextFieldRow(hint: 'Name', image: Assets.human.path),
-                    IconTextFieldRow(hint: 'Email', image: Assets.mail.path),
-                    IconTextFieldRow(hint: 'Password', image: Assets.key.path,hintImage: Assets.visible.path),
+                    IconTextFieldRow(hint: 'Name', image: Assets.human.path,
+                    onTextChange: (value) {
+                      currName = value;
+                    },),
+                    IconTextFieldRow(hint: 'Email', image: Assets.mail.path,
+                        onTextChange: (value) {
+                          currEmail = value;
+                        },),
+                    IconTextFieldRow(hint: 'Password', image: Assets.key.path,hintImage: Assets.visible.path,
+                        onTextChange: (value) {
+                          currPassword = value;
+                        },),
                     SizedBox(height: 25),
+                    BlocSelector<SignUpCubit, SignUpState, SignUp?>(
+                      selector: (state) {
+                        if (state is SignUp && (currName.isEmpty)) {
+                          return SignUp(status: 'Failed', reason: "Name must not be empty");
+                        }
+                        if (state is SignUp && (currEmail.isEmpty)) {
+                          return SignUp(status: 'Failed', reason: "Email must not be empty");
+                        }
+                        if (state is SignUp && (currPassword.isEmpty)) {
+                          return SignUp(status: 'Failed', reason: "Password must not be empty");
+                        }
+                        if (state is SignUp && !_isEmailValid(currEmail)) {
+                          return SignUp(status: 'Failed', reason: "Invalid email format");
+                        }
+                        if (state is SignUp && !_isPasswordValid(currPassword)) {
+                          return SignUp(status: 'Failed', reason: "Password is too weak");
+                        }
+                        if (state is SignUp && !(currPassword.isEmpty || currEmail.isEmpty || currName.isEmpty || !_isPasswordValid(currPassword) || !_isEmailValid(currEmail))) {
+                          return SignUp(status: 'Success', reason: '');
+                        }
+                        return null;
 
-                    Container(
-                        height: 34,
-                        width: 65,
-                        decoration: BoxDecoration (
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(7),
-                        ),
+                      },
+                      builder: (context, state) {
+                        if (state != null && state.status == 'Failed' ) {
+                          return Text(state.reason);
+                        }
+                        if (state != null && state.status == 'Success') {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Congratulations'),
+                              content: Text('Please wait a little longer'),
+                            ),
+                          );
+                        });}
 
-                        child: Center(
-                            child: Text('Signup', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13,color: Colors.white),)
-                        )
+                        return SizedBox.shrink();
+
+                      },
+
+                    ),
+                    InkWell(
+                      child: Container(
+                          height: 34,
+                          width: 65,
+                          decoration: BoxDecoration (
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+
+                          child: Center(
+                              child: Text('Signup', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13,color: Colors.white),)
+                          ),
+                      ),onTap: () {
+                        context.read<SignUpCubit>().signUp();
+                    } ,
                     ),
                     SizedBox(height: 20),
                     Text('or', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),),
@@ -161,19 +220,37 @@ class AccountHolder extends StatelessWidget {
   );
 
 }
-class IconTextFieldRow extends StatelessWidget {
-  const IconTextFieldRow({required this.image, required this.hint, this.hintImage, super.key});
+class IconTextFieldRow extends StatefulWidget {
+  const IconTextFieldRow({required this.image, required this.hint, this.hintImage, required this.onTextChange,super.key});
 
   final String image;
   final String hint;
   final String? hintImage;
+  final ValueChanged<String> onTextChange;
+  @override
+  State<IconTextFieldRow> createState() => _IconTextFieldRowState();
+}
 
+class _IconTextFieldRowState extends State<IconTextFieldRow> {
+  final TextEditingController controller = TextEditingController();
+@override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+  @override
+  void initState() {
+    controller.addListener(() {
+      widget.onTextChange(controller.text);
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) =>  Padding(
     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
     child: Row(
       children: [
-        Image.asset(image,width: 43, height: 43),
+        Image.asset(widget.image,width: 43, height: 43),
         SizedBox(width: 10),
         Expanded(
             child: Container(
@@ -192,14 +269,15 @@ class IconTextFieldRow extends StatelessWidget {
 
               ),
               child: TextField(
+                  controller: controller,
                   decoration:  InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.fromLTRB(17,20,20,10),
-                    hintText: hint,
-                    suffixIcon: hintImage != null
+                    hintText: widget.hint,
+                    suffixIcon: widget.hintImage != null
                         ? Padding(
                       padding: EdgeInsets.only(left: 13.0, right: 8.0), // Adjust the padding as needed
-                      child: Image.asset(hintImage!, width: 21, height: 17), // If an image is provided, use it as a prefix icon
+                      child: Image.asset(widget.hintImage!, width: 21, height: 17), // If an image is provided, use it as a prefix icon
                     )
                         : null, // If no image is provided, don't display an icon
 
@@ -213,4 +291,14 @@ class IconTextFieldRow extends StatelessWidget {
 
   )
   ;
+}
+
+bool _isEmailValid(String email) {
+  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+  return emailRegex.hasMatch(email);
+}
+
+bool _isPasswordValid(String password) {
+  final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$');
+  return passwordRegex.hasMatch(password);
 }

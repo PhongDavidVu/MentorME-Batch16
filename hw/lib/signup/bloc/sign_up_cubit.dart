@@ -14,5 +14,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   void signupWithLinkedIn() {
     emit(SignUpFailed(provider: 'LinkedIn',reason: 'dev is lazy'));
   }
+  void signUp() {
+    emit(SignUp(status:'',reason: ''));
+  }
 
 }

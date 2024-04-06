@@ -10,3 +10,10 @@ class SignUpFailed extends SignUpState {
   String reason;
   SignUpFailed({required this.provider, required this.reason});
 }
+
+class SignUp extends SignUpState {
+  String status;
+  String reason;
+  SignUp({ required this.status, required this.reason});
+
+}
