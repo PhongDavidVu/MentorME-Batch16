@@ -1,8 +1,15 @@
+<<<<<<< Updated upstream
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hw/gen/assets.gen.dart';
 
+=======
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'signup/sign_up_screen.dart';
+import 'generated/l10n.dart';
+>>>>>>> Stashed changes
 void main() {
   runApp(const MainApp());
 }
@@ -13,6 +20,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< Updated upstream
       home: Scaffold(
         body: SafeArea(
           child: Container (
@@ -83,13 +91,46 @@ class MainApp extends StatelessWidget {
         )
       ),
     )
+=======
+      home: MyHome(),
+      localizationsDelegates: const [
+        Batch16String.delegate,
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: Batch16String.delegate.supportedLocales,
+      theme: ThemeData (
+        colorScheme:  ColorScheme.fromSeed(seedColor: Colors.deepOrange)
+      ),
+>>>>>>> Stashed changes
     );
   }
 }
 
+<<<<<<< Updated upstream
 class AccountHolder extends StatelessWidget {
   const AccountHolder({required this.image, super.key});
   final Image image;
+=======
+class PrivateMaterialLocalizations extends LocalizationsDelegate<MaterialLocalizations>{
+  @override
+  bool isSupported(Locale locale) {
+    // TODO: implement isSupported
+    return locale.languageCode == 'vi' || locale.languageCode == 'en';
+  }
+
+  @override
+  Future<MaterialLocalizations> load(Locale locale) {
+    // TODO: implement load
+    return SynchronousFuture<MaterialLocalizations> (PrivateMaterialLocalizations() as MaterialLocalizations);
+  }
+
+  @override
+  bool shouldReload(covariant LocalizationsDelegate<MaterialLocalizations> old) => false;
+
+}
+
+>>>>>>> Stashed changes
 
   @override
   Widget build(BuildContext context)  => Container(
