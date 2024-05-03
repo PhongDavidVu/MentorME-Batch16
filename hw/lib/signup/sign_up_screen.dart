@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hw/gen/assets.gen.dart';
+<<<<<<< HEAD
 import 'package:hw/signup/bloc/sign_up_cubit.dart';
 
+=======
+import 'package:hw/generated/l10n.dart';
+import 'package:hw/signup/bloc/sign_up_cubit.dart';
+import 'package:hw/postSignUp/linkedIn_screen.dart';
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
 
 class MyHome extends StatelessWidget {
   const MyHome({super.key});
@@ -28,7 +34,18 @@ class _HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
+<<<<<<< HEAD
     Scaffold(
+=======
+    BlocListener<SignUpCubit, SignUpState>(
+  listener: (context, state) {
+    if (state is SignUpFailed && state.provider =='LinkedIn')  {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => LinkedInScreen()));
+    }
+  },
+  child: Scaffold(
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
       body: SafeArea(
           child: Container (
             alignment: Alignment.center,
@@ -41,7 +58,11 @@ class _HomeContent extends StatelessWidget {
                         Assets.button.image(width: 89, height: 88),
                         Padding(
                           padding: const EdgeInsets.only(left: 55.0),
+<<<<<<< HEAD
                           child: Text('Create Account' ,
+=======
+                          child: Text(Batch16String.current.createAccount,
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
                             style: TextStyle(fontSize:  18, fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
                         ),
                       ],
@@ -50,7 +71,11 @@ class _HomeContent extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Assets.female.image(width: 89, height: 88),
                     ),
+<<<<<<< HEAD
                     Text('Create account with', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),),
+=======
+                    Text( Batch16String.current.createAccount, style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),),
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -58,7 +83,11 @@ class _HomeContent extends StatelessWidget {
                         BlocListener<SignUpCubit, SignUpState>(
                           listener: (context, state) {
                             if (state is SignUpFailed  && state.provider =='github') {
+<<<<<<< HEAD
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(' Github sign up is not supported')));
+=======
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(Batch16String.current.notSupported('Github'))));
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
                             }
                           },
                           child: AccountHolder(image: Assets.git.image(width:  43, height:  43),
@@ -89,7 +118,11 @@ class _HomeContent extends StatelessWidget {
                       },
                     builder: (context, state) {
                         if (state == 'google') {
+<<<<<<< HEAD
                           return Text ("$state sign up is not supported");
+=======
+                          return Text (Batch16String.current.notSupported("$state"));
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
                         }
                         return SizedBox.shrink();
                     },
@@ -114,6 +147,7 @@ class _HomeContent extends StatelessWidget {
                     BlocSelector<SignUpCubit, SignUpState, SignUp?>(
                       selector: (state) {
                         if (state is SignUp && (currName.isEmpty)) {
+<<<<<<< HEAD
                           return SignUp(status: 'Failed', reason: "Name must not be empty");
                         }
                         if (state is SignUp && (currEmail.isEmpty)) {
@@ -127,6 +161,21 @@ class _HomeContent extends StatelessWidget {
                         }
                         if (state is SignUp && !_isPasswordValid(currPassword)) {
                           return SignUp(status: 'Failed', reason: "Password is too weak");
+=======
+                          return SignUp(status: 'Failed', reason: Batch16String.current.notEmpty('Name'));
+                        }
+                        if (state is SignUp && (currEmail.isEmpty)) {
+                          return SignUp(status: 'Failed', reason: Batch16String.current.notEmpty('Email'));
+                        }
+                        if (state is SignUp && (currPassword.isEmpty)) {
+                          return SignUp(status: 'Failed', reason: Batch16String.current.notEmpty('Password'));
+                        }
+                        if (state is SignUp && !_isEmailValid(currEmail)) {
+                          return SignUp(status: 'Failed', reason: Batch16String.current.invalid("email"));
+                        }
+                        if (state is SignUp && !_isPasswordValid(currPassword)) {
+                          return SignUp(status: 'Failed', reason: Batch16String.current.tooWeak('Password'));
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
                         }
                         if (state is SignUp && !(currPassword.isEmpty || currEmail.isEmpty || currName.isEmpty || !_isPasswordValid(currPassword) || !_isEmailValid(currEmail))) {
                           return SignUp(status: 'Success', reason: '');
@@ -143,8 +192,13 @@ class _HomeContent extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
+<<<<<<< HEAD
                               title: Text('Congratulations'),
                               content: Text('Please wait a little longer'),
+=======
+                              title: Text(Batch16String.current.congrate),
+                              content: Text(Batch16String.current.wait),
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
                             ),
                           );
                         });}
@@ -173,9 +227,15 @@ class _HomeContent extends StatelessWidget {
                     SizedBox(height: 20),
                     Text('or', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),),
                     SizedBox(height: 20),
+<<<<<<< HEAD
                     Text('Already have an account?', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),),
                     SizedBox(height: 20),
                     Text('Login', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),),
+=======
+                    Text(Batch16String.current.alreadyHaveAccount, style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),),
+                    SizedBox(height: 20),
+                    TextButton(onPressed: () {}, child: Text('Login') ),
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
 
 
 
@@ -189,7 +249,12 @@ class _HomeContent extends StatelessWidget {
             ,
           )
       ),
+<<<<<<< HEAD
     );
+=======
+    ),
+);
+>>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
   }
 
 
