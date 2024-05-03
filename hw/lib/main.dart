@@ -1,3 +1,4 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'signup/sign_up_screen.dart';
@@ -44,4 +45,6 @@ class PrivateMaterialLocalizations extends LocalizationsDelegate<MaterialLocaliz
   bool shouldReload(covariant LocalizationsDelegate<MaterialLocalizations> old) => false;
 
 }
+
+
 

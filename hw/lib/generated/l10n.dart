@@ -12,16 +12,6 @@ import 'intl/messages_all.dart';
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
 // ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
-<<<<<<< HEAD
-class S {
-  S();
-
-  static S? _current;
-
-  static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
-=======
 class Batch16String {
   Batch16String();
 
@@ -30,46 +20,25 @@ class Batch16String {
   static Batch16String get current {
     assert(_current != null,
         'No instance of Batch16String was loaded. Try to initialize the Batch16String delegate before accessing Batch16String.current.');
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
-<<<<<<< HEAD
-  static Future<S> load(Locale locale) {
-=======
   static Future<Batch16String> load(Locale locale) {
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
     final name = (locale.countryCode?.isEmpty ?? false)
         ? locale.languageCode
         : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-<<<<<<< HEAD
-      final instance = S();
-      S._current = instance;
-=======
       final instance = Batch16String();
       Batch16String._current = instance;
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
 
       return instance;
     });
   }
 
-<<<<<<< HEAD
-  static S of(BuildContext context) {
-    final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
-    return instance!;
-  }
-
-  static S? maybeOf(BuildContext context) {
-    return Localizations.of<S>(context, S);
-=======
   static Batch16String of(BuildContext context) {
     final instance = Batch16String.maybeOf(context);
     assert(instance != null,
@@ -79,7 +48,6 @@ class Batch16String {
 
   static Batch16String? maybeOf(BuildContext context) {
     return Localizations.of<Batch16String>(context, Batch16String);
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
   }
 
   /// `Create Account`
@@ -149,10 +117,6 @@ class Batch16String {
       name: 'alreadyHaveAccount',
       desc: '',
       args: [],
-<<<<<<< HEAD
-=======
-
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
     );
   }
 
@@ -223,11 +187,7 @@ class Batch16String {
   }
 }
 
-<<<<<<< HEAD
-class AppLocalizationDelegate extends LocalizationsDelegate<S> {
-=======
 class AppLocalizationDelegate extends LocalizationsDelegate<Batch16String> {
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
@@ -240,11 +200,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<Batch16String> {
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-<<<<<<< HEAD
-  Future<S> load(Locale locale) => S.load(locale);
-=======
   Future<Batch16String> load(Locale locale) => Batch16String.load(locale);
->>>>>>> W5-TakeHome(Locolisation-+-Theme-+-NewLinkedInScreen
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 
