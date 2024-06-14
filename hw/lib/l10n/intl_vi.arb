@@ -1,4 +1,16 @@
 {
   "@@locale": "vi",
-  "createAccount": "Tạo Tài Khoản"
+  "createAccount": "Tạo Tài Khoản",
+  "notSupported": "Đăng ký {platform} không được hỗ trợ",
+  "login": "Đăng nhập",
+  "signup": "Đăng ký",
+  "congrate": "Chúc mừng!",
+  "wait": "Vui lòng chờ thêm một chút...",
+  "alreadyHaveAccount": "Đã có tài khoản?",
+  "notEmpty": "{field} không được để trống",
+  "invalid": "Định dạng {field} không hợp lệ",
+  "tooWeak": "{field} quá yếu",
+  "subString": "Xin chào {name}",
+  "pluralCount": "{count, plural, zero {Số nhiều là 0} one {Đây là chuỗi cho số nhiều = 1} other{Số lượng là {count}}}",
+  "pageHomeBirthday": "{sex, select, male {Sinh nhật của anh ấy} female {Sinh nhật của cô ấy} other {Sinh nhật của họ}}"
 }

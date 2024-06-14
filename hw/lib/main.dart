@@ -1,8 +1,8 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'signup/sign_up_screen.dart';
 import 'generated/l10n.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -20,15 +20,14 @@ class MainApp extends StatelessWidget {
         DefaultWidgetsLocalizations.delegate,
       ],
       supportedLocales: Batch16String.delegate.supportedLocales,
-      theme: ThemeData (
-        colorScheme:  ColorScheme.fromSeed(seedColor: Colors.deepOrange)
-      ),
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange)),
     );
   }
 }
 
-
-class PrivateMaterialLocalizations extends LocalizationsDelegate<MaterialLocalizations>{
+class PrivateMaterialLocalizations
+    extends LocalizationsDelegate<MaterialLocalizations> {
   @override
   bool isSupported(Locale locale) {
     return locale.languageCode == 'vi' || locale.languageCode == 'en';
@@ -37,13 +36,12 @@ class PrivateMaterialLocalizations extends LocalizationsDelegate<MaterialLocaliz
   @override
   Future<MaterialLocalizations> load(Locale locale) {
     // TODO: implement load
-    return SynchronousFuture<MaterialLocalizations> (PrivateMaterialLocalizations() as MaterialLocalizations);
+    return SynchronousFuture<MaterialLocalizations>(
+        PrivateMaterialLocalizations() as MaterialLocalizations);
   }
 
   @override
-  bool shouldReload(covariant LocalizationsDelegate<MaterialLocalizations> old) => false;
-
+  bool shouldReload(
+          covariant LocalizationsDelegate<MaterialLocalizations> old) =>
+      false;
 }
-
-
-
