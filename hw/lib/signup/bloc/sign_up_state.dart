@@ -1,6 +1,6 @@
 part of 'sign_up_cubit.dart';
 
-@immutable
+
 sealed class SignUpState {}
 
 final class SignUpInitial extends SignUpState {}
@@ -16,4 +16,8 @@ class SignUp extends SignUpState {
   String reason;
   SignUp({ required this.status, required this.reason});
 
+}
+class SignUpSuccess extends SignUpState {
+  String provider;
+  SignUpSuccess({required this.provider});
 }

@@ -31,7 +31,7 @@ class _HomeContent extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocListener<SignUpCubit, SignUpState>(
         listener: (context, state) {
-          if (state is SignUpFailed && state.provider =='LinkedIn')  {
+          if (state is SignUpSuccess && state.provider =='LinkedIn')  {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => LinkedInScreen()));
           }
@@ -71,7 +71,7 @@ class _HomeContent extends StatelessWidget {
                               },
                               child: AccountHolder(image: Assets.git.image(width:  43, height:  43),
                                   onTap: () {
-                                    context.read <SignUpCubit>().signupWithGitHub();
+                                    context.read<SignUpCubit>().signupWithGitHub();
 
 
                                   } ),
@@ -87,36 +87,35 @@ class _HomeContent extends StatelessWidget {
 
                           ],
                         ),
-                        BlocSelector<SignUpCubit, SignUpState, String?>(
-                          selector: (state) {
-                            if (state is SignUpFailed)   {
-                              return state.provider;
-                            }
-                            return null;
 
-                          },
+                          BlocBuilder<SignUpCubit, SignUpState>(
                           builder: (context, state) {
-                            if (state == 'google') {
-                              return Text (Batch16String.current.notSupported("$state"));
-                            }
-                            return SizedBox.shrink();
-                          },
+                            if (state is SignUpFailed && state.provider == 'google') {
+                              return Text(Batch16String.current.notSupported(state.provider));
+                              }
 
-                        ),
+                                  return SizedBox.shrink();
+                            }
+                          )
+
+                        ,
                         Text('or', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),),
                         SizedBox(height: 20),
 
                         IconTextFieldRow(hint: 'Name', image: Assets.human.path,
                           onTextChange: (value) {
                             currName = value;
+                            context.read<SignUpCubit>().name = value;
                           },),
                         IconTextFieldRow(hint: 'Email', image: Assets.mail.path,
                           onTextChange: (value) {
                             currEmail = value;
+                            context.read<SignUpCubit>().email = value;
                           },),
                         IconTextFieldRow(hint: 'Password', image: Assets.key.path,hintImage: Assets.visible.path,
                           onTextChange: (value) {
                             currPassword = value;
+                            context.read<SignUpCubit>().password = value;
                           },),
                         SizedBox(height: 25),
                         BlocSelector<SignUpCubit, SignUpState, SignUp?>(

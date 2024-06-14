@@ -31,7 +31,6 @@ class MainApp extends StatelessWidget {
 class PrivateMaterialLocalizations extends LocalizationsDelegate<MaterialLocalizations>{
   @override
   bool isSupported(Locale locale) {
-    // TODO: implement isSupported
     return locale.languageCode == 'vi' || locale.languageCode == 'en';
   }
 
